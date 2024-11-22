@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Root Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 20px;
+      }
+      input,
+      button {
+        font-size: 18px;
+        margin: 10px;
+        padding: 10px;
+      }
+      .result {
+        font-size: 20px;
+        color: green;
+        margin-top: 20px;
+      }
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Digital Root Calculator</h1>
+    <p>Enter a number below to calculate its digital root:</p>
+    <input type="text" id="numberInput" placeholder="Enter your number" />
+    <button onclick="calculateDigitalRoot()">Calculate</button>
+    <div class="result" id="result"></div>
+
+    <script>
+      function calculateDigitalRoot() {
+        let input = document.getElementById('numberInput').value;
+
+        // Trim spaces and remove unwanted characters
+        input = input.replace(/\s+/g, '');
+
+        // Validate input: check for non-numeric characters
+        if (!/^\d+$/.test(input)) {
+          document.getElementById('result').innerHTML =
+            '<span class="error">Please enter a valid number without special characters or letters.</span>';
+          return;
+        }
+
+        // Calculate digital root
+        let number = input;
+        while (number.length > 1) {
+          number = number
+            .split('')
+            .reduce((sum, digit) => sum + parseInt(digit), 0)
+            .toString();
+        }
+
+        document.getElementById(
+          'result'
+        ).innerHTML = `The digital root is: ${number}`;
+      }
+    </script>
+  </body>
+</html>
